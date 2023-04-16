@@ -1,6 +1,8 @@
 package com.cloud.test.file.util;
 
+import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
@@ -45,6 +47,13 @@ public class FileUploadUtil {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void deleteFile(String fileUrl) {
+        int point = fileUrl.indexOf('/', 10) + 1;
+        String fileKey = fileUrl.substring(point);
+        amazonS3Client.deleteObject(buketName, fileKey);
+        log.info("success delete file = {}", fileKey);
     }
 
     private String createStoreFilename(String originalFilename) {

@@ -2,9 +2,7 @@ package com.cloud.test.file.controller;
 
 import com.cloud.test.file.service.FileService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
@@ -17,5 +15,11 @@ public class FileController {
     public String uploadFile(@RequestPart MultipartFile file) {
 
         return fileService.uploadFile(file);
+    }
+
+    @DeleteMapping("/api/delete")
+    public String deleteFile(@RequestParam String fileUrl) {
+        fileService.deleteFile(fileUrl);
+        return "success";
     }
 }

@@ -14,4 +14,8 @@ public class FileService {
     public String uploadFile(MultipartFile multipartFile) {
         return fileUploadUtil.uploadFile(multipartFile);
     }
+
+    public void deleteFile(String fileUrl) {
+        fileUploadUtil.deleteFile(fileUrl);
+    }
 }
